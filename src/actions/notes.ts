@@ -4,6 +4,7 @@ import { getUser } from "@/auth/server";
 import { prisma } from "@/db/prisma";
 import { handleError } from "@/lib/utils";
 import openai from "@/openai";
+import { Note } from "@prisma/client";
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 
 
@@ -66,7 +67,7 @@ export const askAIAboutNotesAction = async (
   const user = await getUser();
   if (!user) throw new Error("You must be logged in to ask AI questions");
 
-  const notes = await prisma.note.findMany({
+  const notes: Pick<Note, "text" | "createdAt" | "updatedAt">[] = await prisma.note.findMany({
     where: { authorId: user.id },
     orderBy: { createdAt: "desc" },
     select: { text: true, createdAt: true, updatedAt: true },

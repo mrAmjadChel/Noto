@@ -34,7 +34,7 @@ async function AppSidebar() {
             {user ? (
               "Your Notes"
             ) : (
-              <p>
+              <p className="mt-10 rounded-xl border border-gray-600 p-2">
                 <Link href="/login" className="underline">
                   Login
                 </Link>{" "}

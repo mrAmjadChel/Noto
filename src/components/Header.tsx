@@ -28,10 +28,7 @@ async function Header() {
           className="rounded-full"
         />
 
-        {/* <h1 className="flex flex-col pb-1 text-2xl leading-6 font-semibold">
-          AI <span>Notes</span>
-        </h1> */}
-        <h1 className="text-2xl font-semibold pb-1 leading-6">
+        <h1 className="text-3xl font-bold pb-1 leading-6">
           Noto
         </h1>
       </Link>

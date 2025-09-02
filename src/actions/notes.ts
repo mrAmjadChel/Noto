@@ -67,7 +67,7 @@ export const askAIAboutNotesAction = async (
   const user = await getUser();
   if (!user) throw new Error("You must be logged in to ask AI questions");
 
-  const notes: Pick<Note, "text" | "createdAt" | "updatedAt">[] = await prisma.note.findMany({
+  const notes = await prisma.note.findMany({
     where: { authorId: user.id },
     orderBy: { createdAt: "desc" },
     select: { text: true, createdAt: true, updatedAt: true },
@@ -78,7 +78,7 @@ export const askAIAboutNotesAction = async (
   }
 
   const formattedNotes = notes
-    .map((note) =>
+    .map((note: Pick<Note, "text" | "createdAt" | "updatedAt">) =>
       `
       Text: ${note.text}
       Created at: ${note.createdAt}
